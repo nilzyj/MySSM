@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--配置文件的引入-->
+    <properties resource="jdbc.properties"/>
+    <typeAliases>
+        <!--第一种：<typeAlias type="model.Person" alias="Person"/>-->
+        <!--第二种--><package name="com.dim.beginspring.model"/>
+        <!--第三种 @Alias("User")
+                    public class User {
+                        private int id;
+                        public int getId() {
+                            return id;
+                        }
+                        public void setId(int id) {
+                            this.id = id;
+                        }
+                    }-->
+    </typeAliases>
+    <environments default="development">
+        <!-- 环境配置开始，可以配置多个环境 而使用哪一个可以在创建session时指定，默认使用default中的值 -->
+        <environment id="development">
+            <!--事务配置，使用jdbc类型的事务  -->
+            <transactionManager type="JDBC"/>
+            <!--数据源的配置，使用库链接池类型 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="sqlmap_user.xml"/>
+    </mappers>
+</configuration>
