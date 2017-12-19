@@ -5,11 +5,28 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!--xmlns="http://www.springframework.org/schema/beans"表示这是spring beans的xml配置文件-->
     <!--该文件根据命名约定{servlet-name}-servlet.xml命名-->
+
+
+    <!--不使用注解的配置-->
+    <!--<bean name="/hello" class="com.dim.beginspring.HelloReaderController"/>-->
+    <!--处理映射器将bean的name作为url进行查找，需要在配置Handle时指定name（即url）-->
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+    <!--处理器适配器，所有处理器适配器都要实现HandlerAdapter接口-->
+    <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+
+    <!--使用注解的配置-->
     <!--该包中所有注解的Bean都会被自动注册到应用程序上下文中-->
     <!--配置要扫描的包-->
     <context:component-scan base-package="com.dim.beginspring"/>
     <!--激活Bean中定义的注解-->
     <context:annotation-config />
+    <!--配置annotation类型的处理映射器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
+    <!--配置annotation类型的处理器适配器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+
+    <!--spring4.0之后，不配置处理映射器、处理器适配器、视图解析器，则会使用默认的-->
+    <!--spring4.0之后，有更简便的方式-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--定义前缀后缀以便获取jsp-->
@@ -23,7 +40,7 @@
         <property name="prefix" value="" />
         <property name="suffix" value=".ftl" />
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
-        <property name="cache" value="true"/>
+        <property name="cache" value="false"/>
         <!-- 此变量值为pageContext.request, 页面使用方法：rc.contextPath -->
         <property name="requestContextAttribute" value="rc" />
         <!-- 将请求和会话属性作为变量暴露给FreeMarker模板使用。要做到这一点，可以设置exposeRequestAttributes或者exposeSessionAttributes为true -->

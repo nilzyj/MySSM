@@ -17,6 +17,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<UserPO> selectUser() {
-        return MybatisUtil.getSqlSession().selectList("query");
+        return MybatisUtil.getSqlSession().selectList("queryList");
     }
 }
